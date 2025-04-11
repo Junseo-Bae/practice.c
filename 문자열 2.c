@@ -16,9 +16,9 @@ int main()
         if(str[i] != '\0')
         {
             num = num * 10 + (str[i] - '0');
-            printf("%c", str[i]);
         }
     }
+    printf("%d", num);
 
     return 0;
 }
