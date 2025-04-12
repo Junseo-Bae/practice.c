@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-
-// 각 행의 평균 구하기
 
 int main()
 {
@@ -16,7 +13,7 @@ int main()
     {
         for(j = 0; j < 2; j++)
         {
-            arr[i][j] = rand() % 100 + 1;
+            arr[i][j] = rand() % 10 + 1;
             printf("%d ", arr[i][j]);
         }
         printf("\n");
@@ -24,6 +21,7 @@ int main()
 
     for(i = 0; i < 4; i++)
     {
+        sum = 0;
         for(j = 0; j < 2; j++)
         {
             sum = sum + arr[i][j];
