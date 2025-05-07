@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 struct Node* {
-    int ourder;
+    int order;
     struct Node* next;
 };
 
