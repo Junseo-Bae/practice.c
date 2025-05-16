@@ -21,13 +21,31 @@ void show_student(struct student* std, int n)
     char cmp_name[10];
     int i;
 
+    printf("검색할 학생의 이름 : ");
     scanf("%s", cmp_name);
 
     for(i = 0; i < n; i++)
     {
         if(strcmp(cmp_name, std[i].name) == 0)
         {
-            printf("%s %s %d", std[i].number, std[i].name, std[i].score);
+            printf("%s %s %d\n", std[i].number, std[i].name, std[i].score);
+            break;
+        }
+    }
+}
+
+void mod_student(struct student* std, int n)
+{
+    char cmp_name[10];
+    int i;
+
+    scanf("%s", cmp_name);
+
+    for(i = 0; i < n; i++)
+    {
+        if(strcmp(cmp_name, std[i].name) == 0)
+        {
+            scanf("%s %s %d", std[i].number, std[i].name, &std[i].score);
             break;
         }
     }
@@ -44,7 +62,7 @@ int main()
 
     while(m != 4)
     {
-        printf("1(학생 추가), 2(학생 정보 조회), 3(학생 정보 수정), 4(종료)");
+        printf("1(학생 추가), 2(학생 정보 조회), 3(학생 정보 수정), 4(종료) : ");
         scanf("%d", &m);
         switch(m)
         {
@@ -55,7 +73,7 @@ int main()
                 show_student(std, n);
                 break;
             case 3:
-                mod_student();
+                mod_student(std, n);
                 break;
             case 4:
                 break;
