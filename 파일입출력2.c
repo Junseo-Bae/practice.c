@@ -3,7 +3,7 @@
 
 int main()
 {
-    FILE* fp = fopen("text.txt", "w");;
+    FILE* fp = fopen("text.txt", "w");
     char str[100];
     int i;
 
