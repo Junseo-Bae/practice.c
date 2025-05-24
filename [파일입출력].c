@@ -39,6 +39,30 @@ int main()
     file = fopen("student.bin", "wb");
     fwrite(std, sizeof(struct student), 100, file);
     fclose(file);
+
+	struct student std[100];
+    int i, j, n;
+    int sum;
+
+    FILE* file;
+
+    file = fopen("student.bin", "rb");
+    fread(std, sizeof(struct student), 100, file);
+    fclose(file);
+
+    for(i = 0; i < 100; i++)
+    {
+        sum = 0;
+        for(j = 0; j < 5; j++)
+        {
+            sum = sum + std[i].score[j];
+        }
+        std[i].avg = sum / 5.0;
+    }
+
+    file = fopen("student.bin", "wb");
+    fwrite(std, sizeof(struct student), 100, file);
+    fclose(file);
     
 	return 0;
 }
