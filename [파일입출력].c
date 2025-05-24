@@ -63,6 +63,25 @@ int main()
     file = fopen("student.bin", "wb");
     fwrite(std, sizeof(struct student), 100, file);
     fclose(file);
+
+	file = fopen("student.bin", "rb");
+    fread(std, sizeof(struct student), 100, file);
+    fclose(file);
+
+    file = fopen("student.txt", "w");
+    for(i = 0; i < 100; i++)
+    {
+        fprintf(file, "%s\n", std[i].name);
+        fprintf(file, "%d\n", std[i].std_num);
+        for(j = 0; j < 5; j++)
+        {
+            fprintf(file, "%d, ", std[i].score[j]);
+        }
+        fprintf(file, "\n");
+        fprintf(file, "%.1f\n", std[i].avg);
+        fprintf(file, "--------------------------------\n");
+    }
+    fclose(file);
     
 	return 0;
 }
