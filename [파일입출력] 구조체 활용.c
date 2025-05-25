@@ -40,7 +40,7 @@ int main()
     fwrite(std, sizeof(struct student), 100, file);
     fclose(file);
 
-	struct student std[100];
+    struct student std[100];
     int i, j, n;
     int sum;
 
@@ -64,7 +64,7 @@ int main()
     fwrite(std, sizeof(struct student), 100, file);
     fclose(file);
 
-	file = fopen("student.bin", "rb");
+    file = fopen("student.bin", "rb");
     fread(std, sizeof(struct student), 100, file);
     fclose(file);
 
@@ -82,6 +82,6 @@ int main()
         fprintf(file, "--------------------------------\n");
     }
     fclose(file);
-    
-	return 0;
+
+    return 0;
 }
