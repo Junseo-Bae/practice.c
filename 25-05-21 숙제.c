@@ -70,7 +70,7 @@ int main()
     init_queue(&q);
     
     enqueue(&q, "hello");
-    enqueue(&q, "wolrd");
+    enqueue(&q, "world");
     enqueue(&q, "nice");
     
     dequeue(&q, temp);
