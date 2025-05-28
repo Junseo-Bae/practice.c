@@ -20,6 +20,12 @@ struct Node* create_node(char* data)
     return temp;
 }
 
+void delete_node(struct Node* node)
+{
+    free(node->data);
+    free(node);
+}
+
 void init_queue(struct queue* q)
 {
     q->head = NULL;
@@ -51,8 +57,7 @@ void dequeue(struct queue* q, char* temp)
     struct Node* t = q->head;
     strcpy(temp , q->head->data);
     q->head = q->head->next;
-
-    
+    delete_node(t);
 }
 
 void clear_queue(struct queue* q)
