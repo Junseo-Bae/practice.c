@@ -87,6 +87,7 @@ int main()
     enqueue(&q, "nice");
     
     dequeue(&q, temp);
+    
     printf("%s ", temp);
     
     return 0;
