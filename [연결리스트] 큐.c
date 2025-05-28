@@ -39,7 +39,7 @@ void enqueue(struct queue* q, char* data)
     {
         q->head = temp;
     }
-    
+
     if(q->tail != NULL)
     {
         q->tail->next = temp;
@@ -67,8 +67,7 @@ void clear_queue(struct queue* q)
     {
         temp = q->head;
         q->head = q->head->next;
-        free(temp->data);
-        free(temp);
+        delete_node(temp);
     }
     q->tail = NULL;
 }
@@ -87,16 +86,19 @@ int main()
 {
     struct queue q;
     char temp[100];
-    
+
     init_queue(&q);
-    
+
     enqueue(&q, "hello");
     enqueue(&q, "world");
     enqueue(&q, "nice");
-    
+
     dequeue(&q, temp);
-    
-    printf("%s ", temp);
-    
+
+    printf("%s\n", temp);
+
+    print_queue(&q);
+    clear_queue(&q);
+
     return 0;
 }
