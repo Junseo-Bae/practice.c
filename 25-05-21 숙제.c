@@ -48,18 +48,31 @@ void dequeue(struct queue* q, char* temp)
         temp[0] = '\0';
         return;
     }
-    strcpy(temp ,q->head->data);
+    strcpy(temp , q->head->data);
     q->head = q->head->next;
 }
 
 void clear_queue(struct queue* q)
 {
-    
+    struct Node* temp;
+    while(q->head != NULL)
+    {
+        temp = q->head;
+        q->head = q->head->next;
+        free(temp->data);
+        free(temp);
+    }
+    q->tail = NULL;
 }
 
 void print_queue(struct queue* q)
 {
-    
+    struct Node* temp = q->head;
+    while(temp != NULL)
+    {
+        printf("%s ", temp->data);
+        temp = temp->next;
+    }
 }
 
 int main()
