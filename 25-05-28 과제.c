@@ -53,6 +53,14 @@ int add_tail(Node** head, Node** tail, char* data)
         *head = temp;
         *tail = temp;
     }
+    Node* tmp = *head;
+    while(tmp->next != NULL)
+    {
+        tmp = tmp->next;
+    }
+    tmp->next = temp;
+    temp->prev = tmp;
+    *tail = temp;
 }
 
 int add_tail_fast(Node** head, Node** tail, char* data)
