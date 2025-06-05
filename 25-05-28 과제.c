@@ -80,7 +80,35 @@ int add_tail_fast(Node** head, Node** tail, char* data)
 // 과제 head부터 찾기
 int add_next(Node** head, Node** tail, char* target_data, char* data)
 {
-    
+    Node* temp = *head;
+
+    while (temp != NULL) 
+    {
+        if (strcmp(temp->data, target_data) == 0) 
+	{
+            Node* tmp = create_node(data);
+
+            tmp->prev = temp;
+            tmp->next = temp->next;
+
+            if (temp->next != NULL) 
+	    {
+                temp->next->prev = tmp;
+            } 
+	    else 
+	    {
+                *tail = tmp;
+            }
+
+            temp->next = tmp;
+
+            return 1;
+        }
+
+        temp = temp->next;
+    }
+
+    return 0;
 }
 
 // 과제 target data를 찾아서 그 앞에 넣기 tail부터 찾기
