@@ -82,16 +82,16 @@ int add_next(Node** head, Node** tail, char* target_data, char* data)
 {
     Node* temp = *head;
 
-    while (temp != NULL) 
+    while(temp != NULL) 
     {
-        if (strcmp(temp->data, target_data) == 0) 
+        if(strcmp(temp->data, target_data) == 0) 
         {
             Node* tmp = create_node(data);
 
             tmp->prev = temp;
             tmp->next = temp->next;
 
-            if (temp->next != NULL) 
+            if(temp->next != NULL) 
             {
                 temp->next->prev = tmp;
             }
@@ -112,16 +112,16 @@ int add_before(Node** head, Node** tail, char* target_data, char* data)
 {
     Node* temp = *tail;
 
-    while (temp != NULL)
+    while(temp != NULL)
     {
-        if (strcmp(temp->data, target_data) == 0)
+        if(strcmp(temp->data, target_data) == 0)
         {
             Node* tmp = create_node(data);
 
             tmp->next = temp;
             tmp->prev = temp->prev;
 
-            if (temp->prev != NULL)
+            if(temp->prev != NULL)
             {
                 temp->prev->next = tmp;
             }
