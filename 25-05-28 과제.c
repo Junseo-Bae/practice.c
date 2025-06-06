@@ -114,7 +114,33 @@ int add_next(Node** head, Node** tail, char* target_data, char* data)
 // 과제 target data를 찾아서 그 앞에 넣기 tail부터 찾기
 int add_before(Node** head, Node** tail, char* target_data, char* data)
 {
-    
+    Node* temp = *tail;
+
+    while (temp != NULL)
+    {
+        if (strcmp(temp->data, target_data) == 0)
+        {
+            Node* tmp = create_node(data);
+            tmp->next = temp;
+            tmp->prev = temp->prev;
+
+            if (temp->prev != NULL)
+            {
+                temp->prev->next = tmp;
+            }
+            else
+            {
+                *head = tmp;
+            }
+
+            temp->prev = tmp;
+
+            return 1;
+        }
+        temp = temp->prev;
+    }
+
+    return 0;
 }
 
 int add_index(struct Node** head, int index, char* data)
