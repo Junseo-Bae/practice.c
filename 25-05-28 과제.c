@@ -81,29 +81,29 @@ int add_tail_fast(Node** head, Node** tail, char* data)
 int add_next(Node** head, Node** tail, char* target_data, char* data)
 {
     Node* temp = *head;
-    
-    while(temp != NULL)
+
+    while (temp != NULL) 
     {
-        if(strcpm(temp->data, target_data) == 0)
+        if (strcmp(temp->data, target_data) == 0) 
         {
             Node* tmp = create_node(data);
+
             tmp->prev = temp;
             tmp->next = temp->next;
-            
-            if(temp->next != NULL)
+
+            if (temp->next != NULL) 
             {
                 temp->next->prev = tmp;
             }
-            else
-            {
-                *tail = tmp;
-            }
-            
+
             temp->next = tmp;
+
             return 1;
         }
+
         temp = temp->next;
     }
+
     return 0;
 }
 
@@ -111,29 +111,29 @@ int add_next(Node** head, Node** tail, char* target_data, char* data)
 int add_before(Node** head, Node** tail, char* target_data, char* data)
 {
     Node* temp = *tail;
-    
-    while(temp != NULL)
+
+    while (temp != NULL)
     {
-        if(strcmp(temp->data, target_data) == 0)
+        if (strcmp(temp->data, target_data) == 0)
         {
             Node* tmp = create_node(data);
+
             tmp->next = temp;
             tmp->prev = temp->prev;
-            
-            if(temp->prev != NULL)
+
+            if (temp->prev != NULL)
             {
                 temp->prev->next = tmp;
             }
-            else
-            {
-                *head = tmp;
-            }
-            
+
             temp->prev = tmp;
+
             return 1;
         }
+
         temp = temp->prev;
     }
+
     return 0;
 }
 
@@ -158,30 +158,30 @@ int delete_index(struct Node** head, int index)
 
 int main()
 {
-  Node* head = NULL;
-  Node* tail = NULL;
+    Node* head = NULL;
+    Node* tail = NULL;
 
-  add_head(&head, &tail, "hello");
+    add_head(&head, &tail, "hello");
 
-  // 연결리스트의 맨 뒤에 world 추가
-  add_tail(&head, &tail, "world");
-  add_tail_fast(&head, &tail, "nice");
+    // 연결리스트의 맨 뒤에 world 추가
+    add_tail(&head, &tail, "world");
+    add_tail_fast(&head, &tail, "nice");
 
-  // 연결리스트의 hello 뒤에 good 추가
-  add_next(&head, &tail, "hello", "good");
-  add_before(&head, &tail, "good", "very good");
+    // 연결리스트의 hello 뒤에 good 추가
+    add_next(&head, &tail, "hello", "good");
+    add_before(&head, &tail, "good", "very good");
 
-  // 연결리스트의 2번째 뒤에 bad 추가
-  add_index(&head, &tail,  2, "bad");
+    // 연결리스트의 2번째 뒤에 bad 추가
+    add_index(&head, &tail,  2, "bad");
 
-  // 연결리스트에서 world 삭제
-  delete_target(&head, &tail, "world");
+    // 연결리스트에서 world 삭제
+    delete_target(&head, &tail, "world");
 
-  delete_index(&head, &tail, 1);
+    delete_index(&head, &tail, 1);
 
-  // 전체 연결리스트 출력
-  print_linkedlist(head);
-  print_reverse_linkedlist(head);
+    // 전체 연결리스트 출력
+    print_linkedlist(head);
+    print_reverse_linkedlist(head);
 
     return 0;
 }
