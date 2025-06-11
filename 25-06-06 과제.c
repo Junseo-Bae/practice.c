@@ -274,6 +274,15 @@ int delete_index(Node** head, Node** tail, int index)
 // 과제 - index에 해당하는 노드를 tail부터 찾아서 반환
 Node* get_node_index_tail(Node** head, Node** tail, int index)
 {
+	Node* temp = *tail;
+    int i;
+
+    for (i = 0; i < index; i++) 
+    {
+        temp = temp->prev;
+    }
+
+    return temp;
 }
 
 void reverse_list(Node** head, Node** tail)
