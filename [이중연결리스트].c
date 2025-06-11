@@ -24,9 +24,15 @@ void delete_node(Node* node)
     free(node);
 }
 
-void delete_all(struct Node* head)
+void delete_all(Node** head)
 {
-
+    Node* temp = *head;
+    while(head != NULL)
+    {
+        temp = temp->next;
+        delete_node(head);
+        head = temp;
+    }
 }
 
 int add_head(Node** head, Node** tail, char* data)
@@ -205,7 +211,7 @@ int delete_target(Node** head, Node** tail, char* target_data)
     Node* temp = *head;
     while(temp != NULL)
     {
-        if(strcmp(temp->next, target_data) == 0)
+        if(strcmp(temp->data, target_data) == 0)
         {
             if(temp->next == NULL && temp->prev == NULL)
             {
@@ -243,43 +249,48 @@ int delete_target(Node** head, Node** tail, char* target_data)
 int delete_index(Node** head, Node** tail, int index)
 {
 	Node* temp = *head;
-    int i;
 
-    for (i = 0; i < index; i++) 
+    int i;
+    for(i = 0; i < index; i++)
     {
         temp = temp->next;
+        if(temp == NULL)
+        {
+            return 0;
+        }
     }
 
-    if (temp->prev != NULL) 
+    if(temp->prev != NULL)
     {
         temp->prev->next = temp->next;
-    } 
-    else 
+    }
+    else
     {
         *head = temp->next;
     }
 
-    if (temp->next != NULL) 
+    if(temp->next != NULL)
     {
         temp->next->prev = temp->prev;
-    } 
-    else 
+    }
+    else
     {
         *tail = temp->prev;
     }
 
     delete_node(temp);
+    return 1;
 }
 
 // 과제 - index에 해당하는 노드를 tail부터 찾아서 반환
 Node* get_node_index_tail(Node** head, Node** tail, int index)
 {
-	Node* temp = *tail;
-    int i;
+	Node* temp = *head;
 
-    for (i = 0; i < index; i++) 
+    int i;
+    for(i = 0; i < index; i++)
     {
-        temp = temp->prev;
+        temp = temp->next;
     }
 
     return temp;
@@ -328,11 +339,13 @@ int main()
 
     // 연결리스트에서 world 삭제
     delete_target(&head, &tail, "world");
+    print_linkedlist(head);
+    printf("\n");
 
-    //delete_index(&head, &tail, 1);
+    delete_index(&head, &tail, 1);
 
-    //Node* found = get_node_index_tail(&head, &tail, 1);
-    //printf("find node : %s\n", found->data);
+    Node* found = get_node_index_tail(&head, &tail, 1);
+    printf("find node : %s\n", found->data);
 
     // 전체 연결리스트 출력
     print_linkedlist(head);
