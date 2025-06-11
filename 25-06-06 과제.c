@@ -242,6 +242,33 @@ int delete_target(Node** head, Node** tail, char* target_data)
 // 과제 - index 해당하는 노드를 삭제
 int delete_index(Node** head, Node** tail, int index)
 {
+	Node* temp = *head;
+    int i;
+
+    for (i = 0; i < index; i++) 
+    {
+        temp = temp->next;
+    }
+
+    if (temp->prev != NULL) 
+    {
+        temp->prev->next = temp->next;
+    } 
+    else 
+    {
+        *head = temp->next;
+    }
+
+    if (temp->next != NULL) 
+    {
+        temp->next->prev = temp->prev;
+    } 
+    else 
+    {
+        *tail = temp->prev;
+    }
+
+    delete_node(temp);
 }
 
 // 과제 - index에 해당하는 노드를 tail부터 찾아서 반환
