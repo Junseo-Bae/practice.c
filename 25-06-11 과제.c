@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Term{
+typedef struct Term {
     int coef;
     int exp;
     struct Term* prev;
@@ -23,17 +23,32 @@ Term* insertTerm(Term* poly, int coef, int exp)
     else
     {
         Term* tmp = poly;
+        Term* prev = NULL;
 
-        while(tmp->next != NULL)
+        while(tmp != NULL && tmp->exp >= exp)
         {
-            if(exp <= tmp->exp)
-            {
-                break;
-            }
+            prev = tmp;
             tmp = tmp->next;
         }
-        tmp->next = temp;
+
+        if(prev == NULL)
+        {
+            temp->next = poly;
+            poly->prev = temp;
+            poly = temp;
+        }
+        else
+        {
+            temp->next = tmp;
+            temp->prev = prev;
+            prev->next = temp;
+            if(tmp != NULL)
+            {
+                tmp->prev = temp;
+            }
+        }
     }
+
     return poly;
 }
 
@@ -42,13 +57,14 @@ void printPoly(Term* poly)
     Term* tmp = poly;
     while(tmp != NULL)
     {
-        printf("%dx^%d ", tmp->coef, tmp->exp);
+        printf("%dx^%d", tmp->coef, tmp->exp);
         if(tmp->next != NULL)
         {
-            printf("+ ");
+            printf(" + ");
         }
         tmp = tmp->next;
     }
+    printf("\n");
 }
 
 int main()
