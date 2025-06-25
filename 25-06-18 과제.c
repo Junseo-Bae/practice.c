@@ -242,8 +242,6 @@ int main()
     int result = evalPoly(poly3, 4);
     printf("p3 = %d\n", result);
 
-    freePoly();
-
     // 배열로
 
     return 0;
