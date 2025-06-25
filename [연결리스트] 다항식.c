@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct Term {
     int coef;
@@ -169,6 +170,7 @@ Term* addPoly(Term* p1, Term* p2)
 Term* mulPoly(Term* p1, Term* p2)
 {
     int new_coef, new_exp;
+    Term* new_poly = NULL;
 
     Term* t1 = p1;
     while (t1 != NULL)
@@ -178,12 +180,12 @@ Term* mulPoly(Term* p1, Term* p2)
         {
             new_coef = t1->coef * t2->coef;
             new_exp = t1->exp + t2->exp;
+            new_poly = insertTerm(new_poly, new_coef, new_exp);
 
             t2 = t2->next;
         }
         t1 = t1->next;
     }
-
     return new_poly;
 }
 
@@ -191,16 +193,16 @@ Term* evalPoly(Term* poly, int x)
 {
     Term* temp = poly;
     int sum = 0;
-    int i, count;
+    int i;
 
     while(temp != NULL)
     {
-        count = 1;
-        for(i = 0; i < temp->exp; i++)
-        {
-            count = count * x;
-        }
-        sum = sum + temp->coef * count;
+        //count = 1;
+        //for(i = 0; i < temp->exp; i++)
+        //{
+            //count = count * x;
+        //}
+        sum = sum + temp->coef * (int)pow(x, temp->exp);
         temp = temp->next;
     }
     return sum;
