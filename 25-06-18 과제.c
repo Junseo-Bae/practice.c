@@ -57,7 +57,9 @@ Term* insertTerm(Term* poly, int coef, int exp)
                     }
                     free(tmp);
                 }
-            } else {
+            }
+            else
+            {
                 temp->next = poly;
                 poly->prev = temp;
                 poly = temp;
@@ -166,12 +168,42 @@ Term* addPoly(Term* p1, Term* p2)
 
 Term* mulPoly(Term* p1, Term* p2)
 {
-    Term* mul = NULL;
-    while(p1 != NULL && p2 != NULL)
+    int new_coef, new_exp;
+
+    Term* t1 = p1;
+    while (t1 != NULL)
     {
-        p1 = p1->next;
-        p2 = p2->next;
+        Term* t2 = p2;
+        while (t2 != NULL)
+        {
+            new_coef = t1->coef * t2->coef;
+            new_exp = t1->exp + t2->exp;
+
+            t2 = t2->next;
+        }
+        t1 = t1->next;
     }
+
+    return new_poly;
+}
+
+Term* evalPoly(Term* poly, int x)
+{
+    Term* temp = poly;
+    int sum = 0;
+    int i, count;
+
+    while(temp != NULL)
+    {
+        count = 1;
+        for(i = 0; i < temp->exp; i++)
+        {
+            count = count * x;
+        }
+        sum = sum + temp->coef * count;
+        temp = temp->next;
+    }
+    return sum;
 }
 
 int main()
@@ -201,17 +233,17 @@ int main()
 
     printf("p3 : ");
     printPoly(poly3);
-    
+
     Term* poly4 = mulPoly(poly1, poly2);
 
     printf("p4 : ");
     printPoly(poly4);
-    
+
     int result = evalPoly(poly3, 4);
     printf("p3 = %d\n", result);
-    
+
     freePoly();
-    
+
     // 배열로
 
     return 0;
