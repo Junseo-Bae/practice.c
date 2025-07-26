@@ -5,7 +5,7 @@ int main()
     char str[100];
     char enc[100];
     char dec[100];
-    char key = bae;
+    char key = 'a';
 
     printf("문자열을 입력하세요..");
     scanf("%s", str);
