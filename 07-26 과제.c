@@ -11,21 +11,23 @@ int index;
 
 int push_stack(int n)
 {
-    if(index > STACK_SIZE)
+    if(index >= STACK_SIZE)
     {
         return 0;
     }
     else
     {
         stack[index++] = n;
+        return 1;
     }
 }
 
 int pop_stack()
 {
-    if(index < 0)
+    if(index <= 0)
     {
-        printf("stack is empty");
+        printf("stack is empty\n");
+        return -1;
     }
     else
     {
@@ -39,7 +41,7 @@ int main()
     push_stack(2);
     push_stack(3);
     push_stack(4);
-    if(push_stack(5) == FALSE)
+    if(push_stack(5) == 0)
     {
         printf("stack is full\n");
     }
