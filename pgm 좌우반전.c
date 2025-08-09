@@ -17,7 +17,13 @@ int main() {
     fread(temp, sizeof(char), width * height, file);
     fclose(file);
     
-    
+    for()
+    {
+        for()
+        {
+            char tmp = temp[]
+        }
+    }
 
     return 0;
 }
