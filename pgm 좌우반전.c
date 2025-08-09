@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
-
+int main()
+{
     char type[3] = "P5";
     int width = 640;
     int height = 426;
@@ -12,18 +12,31 @@ int main() {
 
     fscanf(file, "%s\n%d %d\n%d", type, &width, &height, &color);
 
-    char* temp = (char*)malloc(sizeof(char) * width);
-    
-    fread(temp, sizeof(char), width * height, file);
+    char* data = (char*)malloc(sizeof(char) * (width*height));
+
+    fread(data, sizeof(char), width * height, file);
     fclose(file);
-    
-    for()
+
+    int k;
+    for(k = 0; k < height; k++)
     {
-        for()
+        int i = width * k, j = width * k + (width - 1);
+        while(i < j)
         {
-            char tmp = temp[]
+            int temp = data[i];
+            data[i] = data[j];
+            data[j] = temp;
+            i++;
+            j--;
         }
     }
+
+    file = fopen("sample.pgm", "wb");
+    fprintf(file, "%s\n%d %d\n%d\n", type, width, height, color);
+    fwrite(data, sizeof(char), width * height, file);
+    fclose(file);
+
+    free(data);
 
     return 0;
 }
